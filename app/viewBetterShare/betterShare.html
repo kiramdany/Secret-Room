@@ -1,0 +1,23 @@
+<div class="container" id="game">
+	<div ng-hide="game.i === game.numberQuestions">
+		<h2>Which is the better share?</h2>
+		<h4>(click either if they are the same)</h4>
+		<h4 id="score">Score: {{game.score}} / {{game.numberQuestions}}</h4>
+		<h4>Question {{game.i + 1}}</h4>
+
+		<div id="answers">
+			<em><p>{{game.currentShare[0]*game.currentShare[1]/100}}</p></em>
+			<em><p>{{game.currentShare[2]*game.currentShare[3]/100}}</p></em>
+		</div>
+
+
+		<button ng-class="{btn: true, 'btn-default': !game.answered, 'btn-success': game.userAnswer === '1' && game.correct, 'btn-danger': game.userAnswer === '1' && !game.correct }" id="statement1" ng-click="game.check($event)">{{game.currentShare[0]}}% of £{{game.currentShare[1]}} <span ng-class="{glyphicon: true, 'glyphicon-ok': game.correct, 'glyphicon-remove': !game.correct}" ng-show="game.answered && game.userAnswer === '1'"></span> </button>
+		<button ng-class="{btn: true, 'btn-default': !game.answered, 'btn-success': game.userAnswer === '2' && game.correct, 'btn-danger': game.userAnswer === '2' && !game.correct }" id="statement2" ng-click="game.check($event)">{{game.currentShare[2]}}% of £{{game.currentShare[3]}} <span ng-class="{glyphicon: true, 'glyphicon-ok': game.correct, 'glyphicon-remove': !game.correct}" ng-show="game.answered && game.userAnswer === '2'"></span></button>
+		<button class="btn btn-default" ng-click="game.next()" ng-show="game.answered">Next</button>
+	</div>
+	<div ng-show="game.i === game.numberQuestions">
+		<h2>You have finished all the examples</h2>
+		<h4>You scored {{game.score}} out of {{game.numberQuestions}}</h4>
+		<button id="reset" class="btn btn-default" ng-click="game.reset()">Reset</button>
+	</div>
+</div>
